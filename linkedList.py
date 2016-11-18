@@ -42,6 +42,10 @@ class LinkedList:
     def delete(self, value):
         # Find the Node
         current_node = self.head
+        if self.head.data == value and self.head == self.tail:
+            self.head = current_node.next
+            self.tail = self.head
+            return 1
 
         if self.head.data == value:
             self.head = current_node.next
@@ -49,6 +53,10 @@ class LinkedList:
 
         while current_node.next is not None:
             if current_node.next.data == value:
+                if current_node.next == self.tail:
+                    self.tail = current_node
+                    current_node.next = current_node.next.next
+                    return 1
                 current_node.next = current_node.next.next
                 # TODO: How to free memory in python?
 
