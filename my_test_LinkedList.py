@@ -1,8 +1,8 @@
-from linkedList import Node, LinkedList
+from my_linkedList import Node, LinkedList
 import unittest
 
 
-class LinkedlistTest(unittest.TestCase):
+class MyLinkedlistTest(unittest.TestCase):
 
     def test_append_empty(self):
         mylist = LinkedList()
