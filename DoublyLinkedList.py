@@ -1,5 +1,3 @@
-#!python
-
 from __future__ import print_function
 
 
@@ -9,13 +7,14 @@ class Node(object):
         """Initialize this node with the given data"""
         self.data = data
         self.next = None
+        self.previous = None
 
     def __repr__(self):
         """Return a string representation of this node"""
         return 'Node({})'.format(repr(self.data))
 
 
-class LinkedList(object):
+class DoublyLinkedList(object):
 
     def __init__(self, iterable=None):
         """Initialize this linked list; append the given items, if any"""
@@ -29,11 +28,11 @@ class LinkedList(object):
         """Return a string representation of this linked list"""
         return 'LinkedList({})'.format(self.as_list())
 
-    def __iter__(self):
-        current = self.head
-        while current is not None:
-            yield current
-            current = current.next
+    # def __iter__(self):
+    #     current = self.head
+    #     while current is not None:
+    #         yield current
+    #         current = current.next
 
         # my_list = []
         # current_node = self.head
@@ -70,7 +69,7 @@ class LinkedList(object):
         """Insert the given item at the tail of this linked list"""
         # TODO: append given item
         # If the head is None then this is first item being added
-        if self.head is None:
+        if self.is_empty():
             self.head = Node(item)
             self.tail = self.head
         # If the head and tail equal eachother then there should only be one
@@ -142,19 +141,19 @@ class LinkedList(object):
 
 
 def test_linked_list():
-    ll = LinkedList()
+    ll = DoublyLinkedList()
     print(ll)
     ll.append('A')
     print(ll)
     ll.append('B')
     print(ll)
     ll.append('C')
-    print('iterable testing:')
-    for node in ll:
-        print(node)
-        print(node.data)
-        print(node.next)
-    print('done testing interable')
+    # print('iterable testing:')
+    # for node in ll:
+    #     print(node)
+    #     print(node.data)
+    #     print(node.next)
+    # print('done testing interable')
     print(ll)
     print('head: ' + str(ll.head))
     print('tail: ' + str(ll.tail))
