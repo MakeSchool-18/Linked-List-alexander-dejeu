@@ -76,11 +76,13 @@ class DoublyLinkedList(object):
         # element.
         elif self.head == self.tail:
             self.tail = Node(item)
+            self.tail.previous = self.head
             self.head.next = self.tail
         # All other cases should just update the old and new tail data
         else:
             new_tail = Node(item)
             self.tail.next = new_tail
+            new_tail.previous = self.tail
             self.tail = new_tail
 
     def prepend(self, item):
@@ -92,9 +94,11 @@ class DoublyLinkedList(object):
         elif self.head == self.tail:
             self.head = Node(item)
             self.head.next = self.tail
+            self.tail.previous = self.head
         else:
             new_head = Node(item)
             new_head.next = self.head
+            self.head.previous = new_head
             self.head = new_head
 
     def delete(self, item):
@@ -105,12 +109,15 @@ class DoublyLinkedList(object):
         if current_node is None:
             raise ValueError('could not find %c in LinkedList' % (item))
 
+        # There is only one node
         if self.head.data == item and self.head == self.tail:
             self.head = current_node.next
             self.tail = self.head
             return
+        # Deleting the head node
         elif self.head.data == item:
             self.head = current_node.next
+            self.previous = None
             return
         else:
             while current_node.next is not None:
@@ -118,10 +125,13 @@ class DoublyLinkedList(object):
 
                     if current_node.next == self.tail:
                         self.tail = current_node
+                        self.tail.previous = current_node.previous
                         current_node.next = current_node.next.next
                         return
 
                     current_node.next = current_node.next.next
+                    current_node.next.previous = current_node.next.previous.previous
+
                     return
                 current_node = current_node.next
 
