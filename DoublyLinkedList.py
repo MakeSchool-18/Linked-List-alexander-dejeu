@@ -125,8 +125,7 @@ class DoublyLinkedList(object):
 
                     if current_node.next == self.tail:
                         self.tail = current_node
-                        self.tail.previous = current_node.previous
-                        current_node.next = current_node.next.next
+                        self.tail.next = None
                         return
 
                     current_node.next = current_node.next.next
